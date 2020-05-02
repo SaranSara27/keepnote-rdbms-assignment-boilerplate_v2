@@ -23,7 +23,7 @@ CREATE TABLE Category (
   category_name VARCHAR(45) NOT NULL,
   category_descr VARCHAR(45),
   category_creation_date DATE,
-  category_creator INT,
+  category_creator INT NOT NULL,
   FOREIGN KEY (category_creator) REFERENCES User(user_id)
 );
 
