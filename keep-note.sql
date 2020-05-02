@@ -23,7 +23,7 @@ CREATE TABLE Category (
   category_name VARCHAR(45) NOT NULL,
   category_descr VARCHAR(45),
   category_creation_date DATE,
-  category_creator INT NOT NULL,
+  category_creator VARCHAR(45) NOT NULL,
   FOREIGN KEY (category_creator) REFERENCES User(user_id)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE Reminder (
   reminder_descr VARCHAR(200) ,
   reminder_type VARCHAR(20) ,
   reminder_creation_date DATE ,
-  reminder_creator INT ,
+  reminder_creator VARCHAR(45) ,
   FOREIGN KEY (reminder_creator) REFERENCES User(user_id)
 );
 
@@ -77,14 +77,14 @@ INSERT INTO Note VALUES (3, 'Note3', 'content3', 'Started', '2019-10-03');
 INSERT INTO Note VALUES (4, 'Note4', 'content4', 'Completed', '2019-12-03');
 
 --Category
-INSERT INTO Category VALUES ( 1, 'Cat1', 'desc1', '2018-02-06', 1);
-INSERT INTO Category VALUES ( 2, 'Cat2', 'desc2', '2018-03-06', 1);
-INSERT INTO Category VALUES ( 3, 'Cat3', 'desc3', '2018-04-06', 2);
-INSERT INTO Category VALUES ( 4, 'Cat4', 'desc4', '2018-05-06', 2);
+INSERT INTO Category VALUES ( 1, 'Cat1', 'desc1', '2018-02-06', '1');
+INSERT INTO Category VALUES ( 2, 'Cat2', 'desc2', '2018-03-06', '1');
+INSERT INTO Category VALUES ( 3, 'Cat3', 'desc3', '2018-04-06', '2');
+INSERT INTO Category VALUES ( 4, 'Cat4', 'desc4', '2018-05-06', '2');
 
 --Reminder
-INSERT INTO Reminder VALUES ( 1, 'rem1', 'desc1', 'RepeatDaily', '2019-09-26', 1);
-INSERT INTO Reminder VALUES ( 2, 'rem2', 'desc2', 'RepeatOnce', '2019-12-25', 2);
+INSERT INTO Reminder VALUES ( 1, 'rem1', 'desc1', 'RepeatDaily', '2019-09-26', '1');
+INSERT INTO Reminder VALUES ( 2, 'rem2', 'desc2', 'RepeatOnce', '2019-12-25', '2');
 
 --NoteCategory
 INSERT INTO NoteCategory VALUES ( 1,1,1);
