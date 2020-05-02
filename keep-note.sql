@@ -1,6 +1,6 @@
 --User table fields: user_id, user_name, user_added_date, user_password, user_mobile
 CREATE TABLE User (
-  user_id INT NOT NULL primary key,
+  user_id VARCHAR(45) NOT NULL primary key,
   user_name VARCHAR(45) NOT NULL ,
   user_added_date DATE,
   user_password VARCHAR(45),
@@ -59,7 +59,7 @@ CREATE TABLE Notereminder (
 --Usernote table fields : usernote_id, user_id, note_id
 CREATE TABLE UserNote (
   usernote_id INT PRIMARY KEY,
-  user_id INT NOT NULL,
+  user_id VARCHAR(45) NOT NULL,
   note_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES User(user_id),
   FOREIGN KEY (note_id) REFERENCES Note(note_id)
@@ -67,8 +67,8 @@ CREATE TABLE UserNote (
 
 --Insert the rows into the created tables (Note, Category, Reminder, User, UserNote, NoteReminder and NoteCategory).
 --User
-INSERT INTO User (user_id,user_name,user_added_date,user_password,user_mobile) VALUES (1,'Saranya','2019-08-23','pass1',9876514232);
-INSERT INTO User (user_id,user_name,user_added_date,user_password,user_mobile) VALUES (2,'Sara','2019-03-23','pass2',9873514232);
+INSERT INTO User (user_id,user_name,user_added_date,user_password,user_mobile) VALUES ('1','Saranya','2019-08-23','pass1',9876514232);
+INSERT INTO User (user_id,user_name,user_added_date,user_password,user_mobile) VALUES ('2','Sara','2019-03-23','pass2',9873514232);
 
 --Note
 INSERT INTO Note VALUES (1, 'Note1', 'content1', 'Completed', '2019-09-03');
@@ -97,12 +97,12 @@ INSERT INTO Notereminder VALUES ( 2,3,2);
 INSERT INTO Notereminder VALUES ( 3,2,2);
 
 --UserNote
-INSERT INTO UserNote VALUES ( 1,1,1);
-INSERT INTO UserNote VALUES ( 2,2,2);
-INSERT INTO UserNote VALUES ( 3,2,4);
+INSERT INTO UserNote VALUES ( 1,'1',1);
+INSERT INTO UserNote VALUES ( 2,'2',2);
+INSERT INTO UserNote VALUES ( 3,'2',4);
 
 --Fetch the row from User table based on Id and Password.
-Select * from User where user_id=1 and user_password='pass1';
+Select * from User where user_id='1' and user_password='pass1';
 
 --Fetch all the rows from Note table based on the field note_creation_date.
 select * from Note where note_creation_date ='2019-10-03';
@@ -111,13 +111,13 @@ select * from Note where note_creation_date ='2019-10-03';
 select * from Category where category_creation_date>'2018-04-06';
 
 --Fetch all the Note ID from UserNote table for a given User.
-select note_id from UserNote where user_id=2;
+select note_id from UserNote where user_id='2';
 
 --Write Update query to modify particular Note for the given note Id.
 update Note set note_content='Updated Note', note_status='Pending' where note_id=4; 
 
 --Fetch all the Notes from the Note table by a particular User.
-select u.user_id,n.* from Note n,User u,UserNote un where n.note_id=un.note_id and u.user_id=un.user_id and u.user_id=1;
+select u.user_id,n.* from Note n,User u,UserNote un where n.note_id=un.note_id and u.user_id=un.user_id and u.user_id='1';
 
 --Fetch all the Notes from the Note table for a particular Category.
 select c.category_id,n.* from Note n,Category c,NoteCategory nc where n.note_id=nc.note_id and c.category_id=nc.category_id and c.category_id=2;
@@ -138,7 +138,7 @@ Insert into NoteCategory values(4,(select note_id from Note where note_title='No
 Insert into Notereminder values(4,(select note_id from Note where note_title='Note4'),(select reminder_id from Reminder where reminder_name='rem1'));
 
 --Write a query to delete particular Note added by a User(Note and UserNote tables - delete statement)
-delete from UserNote where user_id=1 and note_id=1;;
+delete from UserNote where user_id='1' and note_id=1;;
 
 --Write a query to delete particular Note from particular Category(Note and NoteCategory tables - delete statement)
 delete from NoteCategory where note_id=2 and category_id=3;
